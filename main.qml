@@ -3,11 +3,15 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.1
 
 
-Window {
+ApplicationWindow {
+    id: window
     visible: true
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
-    title: qsTr("Hello World")
+    title: qsTr("SmartHouse")
+     header: ToolBar {
+         id:toolbar
+     }
 
     SwipeView{
         id: view
@@ -17,17 +21,11 @@ Window {
 
             Item {
 
-                id: leftPage
-                Text{
-                    text: "Левая страница"
-                }
-               Button {
-                   id: leftButton
-                   text: "Левая кнопка"
-                   anchors.centerIn: parent.Center
-                   anchors.horizontalCenter: parent.horizontalCenter
-                   onClicked: console.log("leftButton clicked!")
+               LeftPage{
+                id: left
                }
+
+
 
             }
             Item {
@@ -41,6 +39,27 @@ Window {
                 id: thirdPage
                 Text{
                     text: "Правая страница"
+                }
+            }
+            Drawer {
+                id: drawer
+                width: 0.66 * window.width
+                height: window.height
+                position: 0.3
+                Text{
+                    text:"SwipeMenu"
+
+                    transform: Translate {
+                        x: drawer.position * content.width * 0.33
+                    }
+                }
+                background: Rectangle {
+                    Rectangle {
+                        x: parent.width - 1
+                        width: 1
+                        height: parent.height
+                        color: "#21be2b"
+                    }
                 }
             }
 
@@ -67,4 +86,5 @@ Window {
                 }
             }
         }
+
     }

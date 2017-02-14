@@ -3,5 +3,7 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>LeftPage.qml</file>
+        <file>MiddlePage.qml</file>
+        <file>RightPage.qml</file>
     </qresource>
 </RCC>

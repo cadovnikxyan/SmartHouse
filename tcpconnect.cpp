@@ -1,5 +1,5 @@
 #include "tcpconnect.h"
-
+#include <QDebug>
 TcpConnect::TcpConnect()
 {
     socket = new QTcpSocket();
@@ -12,5 +12,5 @@ TcpConnect::~TcpConnect()
 
 void TcpConnect::connecting()
 {
-
+    qDebug()<<"qml receive";
 }

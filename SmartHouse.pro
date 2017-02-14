@@ -32,3 +32,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     tcpconnect.h
+
+DISTFILES +=
+
+QMAKE_CFLAGS +="-std-c++14"

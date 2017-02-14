@@ -5,8 +5,8 @@
 
 class TcpConnect : public QObject
 {
-public:
     Q_OBJECT
+public:
     TcpConnect();
    ~TcpConnect();
     void connecting();

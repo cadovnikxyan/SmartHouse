@@ -9,9 +9,11 @@ class TcpConnect : public QObject
 public:
     TcpConnect();
    ~TcpConnect();
-    void connecting();
 private:
     QTcpSocket* socket;
+public slots:
+    void connecting();
+    void cpp(QString str);
 
 signals:
     void connect();

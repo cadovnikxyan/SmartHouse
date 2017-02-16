@@ -14,3 +14,8 @@ void TcpConnect::connecting()
 {
     qDebug()<<"qml receive";
 }
+
+void TcpConnect::cpp(QString str)
+{
+    qDebug()<<str;
+}

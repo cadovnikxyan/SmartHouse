@@ -4,6 +4,11 @@ import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 
 ApplicationWindow {
+    objectName: "mainWindow"
+    function myQmlFunction(msg) {
+          console.log("Got message:", msg)
+          return "some return value"
+      }
     id: window
     visible: true
     width: Screen.desktopAvailableWidth

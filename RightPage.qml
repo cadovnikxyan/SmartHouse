@@ -13,6 +13,7 @@ ColumnLayout{
     }
     Button {
         id: rightButton
+        objectName: "rightBnt"
         signal qmlSignal(string msg)
         text: "Правая кнопка"
         anchors.centerIn: parent.Center

@@ -10,13 +10,11 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     auto items = engine.rootObjects();
     auto item = items.first()->findChild<QObject*>("rightBnt");
-    auto mainWindow= items.first()->findChild<QObject*>("mainWindow");
-    QVariant returnValue;
-    QVariant msg= "message from c++";
-    QMetaObject::invokeMethod(mainWindow,"myQmlFunction",Q_RETURN_ARG(QVariant,returnValue),Q_ARG(QVariant,msg));
-    TcpConnect* tcp = new TcpConnect();
+    auto mainWindow= items.first();
+
+    TcpConnect* tcp = new TcpConnect(mainWindow);
     QObject::connect(item,SIGNAL(qmlSignal(QString)),tcp,SLOT(connecting()));
     QObject::connect(item,SIGNAL(qmlSignal(QString)),tcp,SLOT(cpp(QString)));
-    qDebug()<<returnValue.toString();
+
     return app.exec();
 }

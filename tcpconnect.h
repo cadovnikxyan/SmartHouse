@@ -7,10 +7,11 @@ class TcpConnect : public QObject
 {
     Q_OBJECT
 public:
-    TcpConnect();
+    TcpConnect(QObject* qml_);
    ~TcpConnect();
 private:
     QTcpSocket* socket;
+    QObject* qml;
 public slots:
     void connecting();
     void cpp(QString str);

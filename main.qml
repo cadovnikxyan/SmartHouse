@@ -7,6 +7,7 @@ ApplicationWindow {
     objectName: "mainWindow"
     function myQmlFunction(msg) {
           console.log("Got message:", msg)
+          textFooter.text=msg;
           return "some return value"
       }
     id: window
@@ -26,6 +27,10 @@ ApplicationWindow {
      }
      footer:ToolBar{
          id:toolbarFooter
+         Text{
+             id:textFooter
+             text:""
+         }
      }
 
     SwipeView{

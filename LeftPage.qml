@@ -27,7 +27,7 @@ ColumnLayout{
           MouseArea{
               anchors.fill: parent
           onClicked: function(){
-              textIn.clear()
+              textIn.text="";
            }
           }
         }

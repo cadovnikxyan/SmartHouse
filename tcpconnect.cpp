@@ -10,16 +10,36 @@ TcpConnect::~TcpConnect()
     delete socket;
 }
 
-void TcpConnect::connecting()
+QVariant TcpConnect::QmlInvoke(QString str)
 {
     QVariant returnValue;
-    QVariant msg= "message from c++";
-    QMetaObject::invokeMethod(qml,"myQmlFunction",Q_RETURN_ARG(QVariant,returnValue),Q_ARG(QVariant,msg));
+    QVariant msg= str;
+    QMetaObject::invokeMethod(qml,"toolFooterUpdate",Q_RETURN_ARG(QVariant,returnValue),Q_ARG(QVariant,msg));
+    return returnValue;
+}
+
+void TcpConnect::connecting()
+{
+    timer= new QTimer();
+    timer->start(200);
     qDebug()<<"qml receive";
-    qDebug()<<returnValue.toString();
+    QObject::connect(timer,&QTimer::timeout,this,[&](){
+        static QString str;
+        if(str.length()<10){
+            str+=".";
+        }else{
+            str=".";
+        }
+        qDebug()<<QmlInvoke(str);
+    });
 }
 
 void TcpConnect::cpp(QString str)
 {
     qDebug()<<str;
+}
+
+void TcpConnect::toolbarUpdate(QString str)
+{
+
 }

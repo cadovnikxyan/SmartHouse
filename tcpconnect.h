@@ -2,6 +2,7 @@
 #define TCPCONNECT_H
 #include <QObject>
 #include <QTcpSocket>
+#include <QTimer>
 
 class TcpConnect : public QObject
 {
@@ -12,9 +13,14 @@ public:
 private:
     QTcpSocket* socket;
     QObject* qml;
+    QVariant QmlInvoke(QString str);
+    QTimer* timer;
+
+
 public slots:
     void connecting();
     void cpp(QString str);
+    void toolbarUpdate(QString str);
 
 signals:
     void connect();

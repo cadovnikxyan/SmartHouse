@@ -10,6 +10,11 @@ ApplicationWindow {
           textFooter.text=msg;
           return "some return value"
       }
+    function toolFooterUpdate(msg){
+        textFooter.text=msg;
+        return "ok"
+    }
+
     id: window
     visible: true
     width: Screen.desktopAvailableWidth

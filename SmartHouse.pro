@@ -33,6 +33,18 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     tcpconnect.h
 
-DISTFILES +=
+RESOURCES += \
+    ../../icons/cable.png \
+    ../../icons/cable1.png \
+    ../../icons/chip-1.png \
+    ../../icons/chip.png \
+    ../../icons/computer.png \
+    ../../icons/cpu.png \
+    ../../icons/download.png \
+    ../../icons/edit.png \
+    ../../icons/photo-camera.png \
+    ../../icons/reload.png \
+    ../../icons/settings-1.png \
+    ../../icons/settings.png
 
 QMAKE_CFLAGS +="-std-c++14"

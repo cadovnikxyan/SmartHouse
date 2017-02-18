@@ -13,7 +13,7 @@ public:
 private:
     QTcpSocket* socket;
     QObject* qml;
-    QVariant QmlInvoke(QString str);
+    QVariant QmlInvoke(const QString &method, const QVariant &msg);
     QTimer* timer;
 
 

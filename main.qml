@@ -14,11 +14,29 @@ ApplicationWindow {
         textFooter.text=msg;
         return "ok"
     }
+    onClosing: {
 
+        console.log("not close")
+        close.accepted = false;
+     }
     id: window
     visible: true
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
+    background:Rectangle {
+        gradient: Gradient {
+            GradientStop { position: 0; color: "#ffffff" }
+            GradientStop { position: 1; color: "#94ffe4" }
+        }
+
+    }
+    overlay.modal: Rectangle {
+           color: "#8f28282a"
+       }
+
+       overlay.modeless: Rectangle {
+           color: "#2f28282a"
+       }
     title: qsTr("SmartHouse")
     header: ToolBar {
          id:toolbarHeader

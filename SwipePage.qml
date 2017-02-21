@@ -7,6 +7,16 @@ Drawer {
     width: 0.66 * window.width
     height: window.height
     position: 0.1
+    focus: true;
+    Keys.enabled: true
+    Keys.priority: Keys.BeforeItem
+    Keys.onReleased: {
+              if (event.matches(StandardKey.Back)) {
+                  console.log("back caught by delegate");
+                  event.accepted = false;
+              }
+              console.log("swipe");
+          }
     ListModel {
         id: fruitModel
 

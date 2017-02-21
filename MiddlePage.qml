@@ -15,6 +15,7 @@ id:gridView
             y: gridView.currentItem.y
             Behavior on x { SpringAnimation { spring: 3; damping: 0.2 } }
             Behavior on y { SpringAnimation { spring: 3; damping: 0.2 } }
+
         }
     }
     cellWidth: 180
@@ -22,7 +23,7 @@ id:gridView
     highlight: highlight
     width:parent.width
     height:parent.height
-  model:ListModel{
+    model:ListModel{
                   id:mainModel
 
                   ListElement {
@@ -42,16 +43,61 @@ id:gridView
                       portrait: ":/../../icons/cpu.png"
                   }
                 }
-                  delegate: Column {
-                      Text { text: name; anchors.horizontalCenter: parent.horizontalCenter }
-                      BorderImage {
-                          width: 180; height: 180
-                          border { left: 30; top: 30; right: 30; bottom: 30 }
-                          horizontalTileMode: BorderImage.Stretch
-                          verticalTileMode: BorderImage.Stretch
-                          source: portrait
-                      }
-                    }
+                  delegate:Component {
+                              id: rectDelegate
+                              Rectangle {
+                                  id: rect
+
+                                  width: 180
+                                  height: 180
+                                  color: '#f0f8ff'
+                                  Text { text: name; anchors.horizontalCenter: parent.horizontalCenter }
+                                  BorderImage {
+                                      width: 180; height: 180
+                                      border { left: 30; top: 30; right: 30; bottom: 30 }
+                                      horizontalTileMode: BorderImage.Stretch
+                                      verticalTileMode: BorderImage.Stretch
+                                      source: portrait
+                                  }
+                                  MouseArea {
+                                      anchors.fill: parent
+                                      onClicked: gridView.currentIndex = index
+                                  }
+                                  states: [
+
+                                      State {
+                                          name: "none"
+                                          when: rect.GridView.isCurrentItem
+                                          PropertyChanges {
+                                              target: rect;
+                                              height: 50;
+                                              width: 50;
+                                          }
+                                      },
+                                      State {
+                                          name: "selected"
+                                          when: (gridView.currentIndex == -1)
+                                      }
+                                  ]
+                                  transitions: Transition {
+                                      PropertyAnimation {
+                                          target: rect
+                                          easing.period: 0.5
+                                          easing.amplitude: 2
+                                          duration: 460
+                                          easing.type: Easing.InSine
+                                          properties: "width, height"
+                                      }
+                                  }
+                              }
+                          }
+
+
+                  flickableChildren: MouseArea {
+                              anchors.fill: parent
+                              onClicked: gridView.currentIndex = -1
+                          }
+                  Component.onCompleted: currentIndex = -1
       focus: true
   }
 

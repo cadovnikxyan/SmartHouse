@@ -24,16 +24,18 @@ QVariant TcpConnect::QmlInvoke(const QString& method,const QVariant& msg)
 
 void TcpConnect::connecting()
 {
-    sio::client h;
-    h.connect("http://127.0.0.1:3000");
-    h.socket()->emit("login");
-//    h.socket()->on("login",[&](){
-//        qDebug()<<"login";
-//    });
+    sio::client* h= new sio::client();
+    h->connect("http://127.0.0.1:3000");
+    h->socket()->emit("event",QString("hello from qt!").toStdString());
+    h->socket()->on("login", [&](sio::event& ev){
+        qDebug()<<"login";
+//        qDebug()<<ev.get_name();
+
+    });
     timer= new QTimer();
-    timer->start(200);
+    timer->start(1000);
     qDebug()<<"qml receive";
-    QObject::connect(timer,&QTimer::timeout,this,[&](){
+    QObject::connect(timer,&QTimer::timeout,this,[&,h](){
         static QString str;
         if(str.length()<10){
             str+=".";
@@ -41,6 +43,7 @@ void TcpConnect::connecting()
             str=".";
         }
         qDebug()<<QmlInvoke("toolFooterUpdate",str);
+        delete h;
     });
 }
 

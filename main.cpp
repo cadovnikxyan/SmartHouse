@@ -2,7 +2,6 @@
 #include <QQmlApplicationEngine>
 #include "tcpconnect.h"
 #include <QSignalMapper>
-#include <sio_client.h>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);

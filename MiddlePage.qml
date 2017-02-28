@@ -91,8 +91,6 @@ id:gridView
                                   }
                               }
                           }
-
-
                   flickableChildren: MouseArea {
                               anchors.fill: parent
                               onClicked: gridView.currentIndex = -1

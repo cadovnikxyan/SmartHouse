@@ -1,8 +1,9 @@
 TEMPLATE = app
 
 QT += qml quick network xml
-CONFIG += c++14
 
+CONFIG += c++14
+CONFIG+=no_keywords
 SOURCES += main.cpp \
     tcpconnect.cpp
 
@@ -33,18 +34,41 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     tcpconnect.h
 
-RESOURCES += \
-    ../../icons/cable.png \
-    ../../icons/cable1.png \
-    ../../icons/chip-1.png \
-    ../../icons/chip.png \
-    ../../icons/computer.png \
-    ../../icons/cpu.png \
-    ../../icons/download.png \
-    ../../icons/edit.png \
-    ../../icons/photo-camera.png \
-    ../../icons/reload.png \
-    ../../icons/settings-1.png \
-    ../../icons/settings.png
+
+
+#RESOURCES += \
+#    ../../icons/cable.png \
+#    ../../icons/cable1.png \
+#    ../../icons/chip-1.png \
+#    ../../icons/chip.png \
+#    ../../icons/computer.png \
+#    ../../icons/cpu.png \
+#    ../../icons/download.png \
+#    ../../icons/edit.png \
+#    ../../icons/photo-camera.png \
+#    ../../icons/reload.png \
+#    ../../icons/settings-1.png \
+#    ../../icons/settings.png
+
 
 QMAKE_CFLAGS +="-std-c++14"
+
+
+INCLUDEPATH += $$PWD/libs/socket.io/include
+DEPENDPATH += $$PWD/libs/socket.io/include
+
+unix:!macx: LIBS += -L$$PWD/libs/socket.io/lib/Release/ -lsioclient
+unix:!macx: PRE_TARGETDEPS += $$PWD/libs/socket.io/lib/Release/libsioclient.a
+
+unix:!macx: LIBS += -L$$PWD/libs/socket.io/lib/Release/ -lsioclient_tls
+unix:!macx: PRE_TARGETDEPS += $$PWD/libs/socket.io/lib/Release/libsioclient_tls.a
+
+
+unix:!macx: LIBS += -L$$PWD/libs/socket.io/lib/Release/ -lboost_date_time
+unix:!macx: PRE_TARGETDEPS += $$PWD/libs/socket.io/lib/Release/libboost_date_time.a
+
+unix:!macx: LIBS += -L$$PWD/libs/socket.io/lib/Release/ -lboost_random
+unix:!macx: PRE_TARGETDEPS += $$PWD/libs/socket.io/lib/Release/libboost_random.a
+
+unix:!macx: LIBS += -L$$PWD/libs/socket.io/lib/Release/ -lboost_system
+unix:!macx: PRE_TARGETDEPS += $$PWD/libs/socket.io/lib/Release/libboost_system.a

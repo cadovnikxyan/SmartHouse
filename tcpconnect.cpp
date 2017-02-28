@@ -1,6 +1,7 @@
 #include "tcpconnect.h"
 #include <QDebug>
 #include <QtXml>
+#include <sio_client.h>
 TcpConnect::TcpConnect(QObject *qml_):qml(qml_)
 {
     socket = new QTcpSocket();
@@ -23,6 +24,12 @@ QVariant TcpConnect::QmlInvoke(const QString& method,const QVariant& msg)
 
 void TcpConnect::connecting()
 {
+    sio::client h;
+    h.connect("http://127.0.0.1:3000");
+    h.socket()->emit("login");
+//    h.socket()->on("login",[&](){
+//        qDebug()<<"login";
+//    });
     timer= new QTimer();
     timer->start(200);
     qDebug()<<"qml receive";

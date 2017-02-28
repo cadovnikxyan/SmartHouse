@@ -17,11 +17,11 @@ private:
     QTimer* timer;
 
 
-public slots:
+public Q_SLOTS:
     void connecting();
     void cpp(QString str);
 
-signals:
+Q_SIGNALS:
     void connect();
 
 

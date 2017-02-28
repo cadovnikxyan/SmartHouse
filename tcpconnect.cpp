@@ -43,7 +43,7 @@ void TcpConnect::connecting()
             str=".";
         }
         qDebug()<<QmlInvoke("toolFooterUpdate",str);
-        delete h;
+//        delete h;
     });
 }
 

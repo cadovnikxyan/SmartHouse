@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "tcpconnect.h"
-
+#include <QSignalMapper>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -11,6 +11,9 @@ int main(int argc, char *argv[])
     auto items = engine.rootObjects();
     auto item = items.first()->findChild<QObject*>("rightBnt");
     auto mainWindow= items.first();
+    auto signalMapper= new QSignalMapper();
+    signalMapper->setMapping(item,"qmlSignal");
+
 
     TcpConnect* tcp = new TcpConnect(mainWindow);
     QObject::connect(item,SIGNAL(qmlSignal(QString)),tcp,SLOT(connecting()));

@@ -1,5 +1,6 @@
 #include "tcpconnect.h"
 #include <QDebug>
+#include <QtXml>
 TcpConnect::TcpConnect(QObject *qml_):qml(qml_)
 {
     socket = new QTcpSocket();
@@ -39,7 +40,3 @@ void TcpConnect::cpp(QString str)
     qDebug()<<str;
 }
 
-void TcpConnect::toolbarUpdate(QString str)
-{
-
-}

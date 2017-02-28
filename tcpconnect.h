@@ -20,7 +20,6 @@ private:
 public slots:
     void connecting();
     void cpp(QString str);
-    void toolbarUpdate(QString str);
 
 signals:
     void connect();

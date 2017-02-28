@@ -4,5 +4,6 @@
         <file>LeftPage.qml</file>
         <file>MiddlePage.qml</file>
         <file>RightPage.qml</file>
+        <file>SwipePage.qml</file>
     </qresource>
 </RCC>

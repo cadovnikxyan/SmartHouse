@@ -11,11 +11,13 @@ TcpConnect::~TcpConnect()
     delete socket;
 }
 
-QVariant TcpConnect::QmlInvoke(QString str)
+QVariant TcpConnect::QmlInvoke(const QString& method,const QVariant& msg)
 {
     QVariant returnValue;
-    QVariant msg= str;
-    QMetaObject::invokeMethod(qml,"toolFooterUpdate",Q_RETURN_ARG(QVariant,returnValue),Q_ARG(QVariant,msg));
+    QMetaObject::invokeMethod(qml
+                              ,method.toStdString().c_str()
+                              ,Q_RETURN_ARG(QVariant,returnValue)
+                              ,Q_ARG(QVariant,msg));
     return returnValue;
 }
 
@@ -31,7 +33,7 @@ void TcpConnect::connecting()
         }else{
             str=".";
         }
-        qDebug()<<QmlInvoke(str);
+        qDebug()<<QmlInvoke("toolFooterUpdate",str);
     });
 }
 

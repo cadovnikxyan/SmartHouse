@@ -14,13 +14,31 @@ ApplicationWindow {
         textFooter.text=msg;
         return "ok"
     }
+    onClosing: {
 
+        console.log("not close")
+        close.accepted = false;
+     }
     id: window
     visible: true
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
+    background:Rectangle {
+        gradient: Gradient {
+            GradientStop { position: 0; color: "#ffffff" }
+            GradientStop { position: 1; color: "#94ffe4" }
+        }
+
+    }
+    overlay.modal: Rectangle {
+           color: "#8f28282a"
+       }
+
+       overlay.modeless: Rectangle {
+           color: "#2f28282a"
+       }
     title: qsTr("SmartHouse")
-     header: ToolBar {
+    header: ToolBar {
          id:toolbarHeader
          Text{
              id:textHeader
@@ -30,7 +48,7 @@ ApplicationWindow {
          anchors.horizontalCenter: parent.horizontalCenter
 
      }
-     footer:ToolBar{
+    footer:ToolBar{
          id:toolbarFooter
          Text{
              id:textFooter
@@ -40,20 +58,20 @@ ApplicationWindow {
 
     SwipeView{
         id: view
-onCurrentIndexChanged:function(){
-    switch(view.currentIndex){
-    case 0:
-        textHeader.text="Left"
-        break
-    case 1:
-        textHeader.text="Main"
-        break
-    case 2:
-        textHeader.text="Right"
-        break
-    }
-}
-            currentIndex: 1
+            onCurrentIndexChanged:function(){
+                switch(view.currentIndex){
+                case 0:
+                    textHeader.text="Left"
+                    break
+                case 1:
+                    textHeader.text="Main"
+                    break
+                case 2:
+                    textHeader.text="Right"
+                    break
+                }
+            }
+                currentIndex: 1
             anchors.fill: parent
             Item {
                LeftPage{
@@ -70,49 +88,9 @@ onCurrentIndexChanged:function(){
                     id:right
                 }
             }
-            Drawer {
-                id: drawer
-                width: 0.66 * window.width
-                height: window.height
-                position: 0.1
-                ListModel {
-                    id: fruitModel
-
-                    ListElement {
-                        name: "Apple"
-                        cost: 2.45
-                    }
-                    ListElement {
-                        name: "Orange"
-                        cost: 3.25
-                    }
-                    ListElement {
-                        name: "Banana"
-                        cost: 1.95
-                    }
-               }
-                ListView {
-                    anchors.fill: parent
-                    model: fruitModel
-                    delegate: Row {
-
-                        Text { text: "Fruit: " + name }
-                        Text { text: "Cost: $" + cost }
-                        Button {text: "buy"; onClicked: function(){
-                        console.log("clicked on "+ name)}
-                        spacing: 3
-                    }
-                    }
-                }
-                background: Rectangle {
-                    Rectangle {
-                        x: parent.width - 1
-                        width: 1
-                        height: parent.height
-                        color: "#21be2b"
-                    }
-                }
-            }
+         SwipePage{
+             id: swipe
+         }
     }
     PageIndicator {
         id: indicator
